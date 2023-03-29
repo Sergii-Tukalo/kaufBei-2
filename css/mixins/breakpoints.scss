@@ -1,0 +1,90 @@
+$breakpoints: (xs: 576px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1440px);
+
+@mixin respond-above($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+@mixin respond-below($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+@mixin respond-between($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  }
+
+  @else {
+    @if (map-has-key($breakpoints, $lower)==false) {
+
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    @if (map-has-key($breakpoints, $upper)==false) {
+
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}
+
+// .dropbtn {
+//   padding: 10px 20px;
+//   font-size: 16px;
+//   border: 1px solid black;
+//   border-radius: 50px;
+//   width: 100%;
+// }
+
+// @mixin button {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   cursor: pointer;
+//   width: 100%;
+//   border-radius: 50px;
+//   background-color: #f62f5e;
+//   color: white;
+//   font-size: 18px;
+//   text-align: center;
+//   padding: 10px;
+//   font-weight: 700;
+//   transition: all 0.3s ease;
+//   height: 42px;
+
+//   &:hover {
+//     background: rgba(0, 0, 0, 0);
+//     color: #f62f5e;
+//     box-shadow: inset 0 0 0 2px #f62f5e;
+//   }
+// }
+
+// .btn {
+//   @include button;
+// }

@@ -1,0 +1,44 @@
+.banner {
+  height: 30vh;
+  margin-bottom: 40px;
+  position: relative;
+
+  @include respond-above(md) {
+    height: 55vh;
+  }
+
+  .banner-swiper-button-next,
+  .banner-swiper-button-prev {
+    color: black;
+  }
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+
+    @include respond-above(md) {
+      display: block;
+    }
+  }
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
